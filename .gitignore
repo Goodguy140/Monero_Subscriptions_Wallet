@@ -3,6 +3,7 @@ monero-blockchain-*
 monero-gen-*
 monero-wallet-*
 monerod
+monerod.exe
 node_to_use.txt
 subscriptions_wallet
 subscriptions_wallet.keys
@@ -10,3 +11,4 @@ subscriptions_wallet_seed.txt
 Subscriptions.json
 wallet_qr_code.png
 .DS_Store
+__pycache__
