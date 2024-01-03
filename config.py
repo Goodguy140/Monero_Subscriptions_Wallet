@@ -100,7 +100,7 @@ https://github.com/lukeprofits/Monero_Subscriptions_Wallet
 # Set Monero Wallet CLI Path
 if platform.system() == 'Windows':
     # Update path to the location of the monero-wallet-cli executable if your on WINDOWS
-    monero_wallet_cli_path = "" + 'monero-wallet-cli.exe'
+    monero_wallet_cli_path = 'monero-wallet-cli.exe'
 else:
     # Update path to the location of the monero-wallet-cli executable if your on other platforms
     monero_wallet_cli_path = os.getcwd() + '/' + 'monero-wallet-cli'
