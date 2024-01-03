@@ -19,6 +19,10 @@ import subscription_functions as sub
 
 # OPEN STUFF FUNCTIONS #################################################################################################
 def start_local_rpc_server_thread():
+    if not os.path.isfile(cfg.monero_wallet_cli_path):
+        print("monero-wallet-rpc not found. Please download it from https://www.getmonero.org/downloads/ and place it in the same folder as this program.")
+        kill_everything()
+        return
     if platform.system() == 'Windows':
         cmd = f'monero-wallet-rpc --wallet-file {cfg.wallet_name} --password "" --rpc-bind-port {cfg.rpc_bind_port} --disable-rpc-login --confirm-external-bind --daemon-host {host} --daemon-port {port}'
     else:
@@ -58,7 +62,7 @@ def start_local_rpc_server_thread():
 
 # CLOSE STUFF FUNCTIONS ################################################################################################
 def kill_everything():
-    print('\n\n Please close this terminal window and relaunch the Monero Subscriptions Wallet')
+    print('\n\nPlease close this terminal window and relaunch the Monero Subscriptions Wallet')
 
     cfg.stop_flag.set()  # Stop threads gracefully
 
@@ -87,10 +91,6 @@ def kill_monero_wallet_rpc():
             print(f"Successfully killed monero-wallet-rpc with PID {pid}")
             cfg.rpc_is_ready = False
             break
-
-        else:
-            print("monero-wallet-rpc process not found")
-
 
 # OTHER RANDOM FUNCTIONS ###############################################################################################
 def get_random_monero_node():
@@ -293,8 +293,9 @@ while True:
     event, values = cfg.window.read()
     print(f"Event: {event}, Values: {values}")
 
-    # CLOSE BUTTON PRESSED
+    # CLOSE BUTTON PRESSED, CLOSE THE PROGRAM
     if event == sg.WIN_CLOSED:
+        kill_everything()
         break
 
     # COPY ADDRESS BUTTON PRESSED
